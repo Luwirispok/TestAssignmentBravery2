@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:power_bank/app/presentation/screens/splash/bloc/splash_bloc.dart';
-import 'package:power_bank/app/presentation/screens/start/bloc/start_bloc.dart';
 import 'package:power_bank/core/ui/widgets/base_bloc_listener.dart';
 import 'package:power_bank/core/ui/widgets/base_bloc_state_widget.dart';
 import 'package:power_bank/di/injection.dart';
@@ -49,7 +48,7 @@ class _SplashScreenState extends BaseBlocStateWidget<SplashScreen, SplashBloc, S
               alignment: Alignment.bottomRight,
               child: SvgPicture.asset(Assets.images.rectangleBottomRight),
             ),
-            Align(alignment: Alignment.center, child: _buildLogo()),
+            Center(child: _buildLogo()),
           ],
         ),
       );

@@ -7,10 +7,8 @@ import 'package:power_bank/app/widgets/buttons/base_button.dart';
 import 'package:power_bank/app/widgets/switcher/switcher.dart';
 import 'package:power_bank/core/ui/widgets/base_bloc_listener.dart';
 import 'package:power_bank/core/ui/widgets/base_bloc_state_widget.dart';
-import 'package:power_bank/di/injection.dart';
 import 'package:power_bank/gen/assets.gen.dart';
 import 'package:power_bank/app/resources/app_colors.dart';
-import 'package:power_bank/localization/app_localizations.dart';
 
 class StartScreen extends StatefulWidget {
   const StartScreen({Key? key}) : super(key: key);
@@ -41,7 +39,7 @@ class _StartScreenState extends BaseBlocStateWidget<StartScreen, StartBloc, Star
           _buildSwitch(),
           const Spacer(flex: 46),
           _buildButtonSign(),
-          const Spacer(flex: 124 + 160 + 56),
+          const Spacer(flex: 340),
         ],
       );
 

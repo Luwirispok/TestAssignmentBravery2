@@ -844,12 +844,14 @@ class _$VerificationCodeStateTearOff {
       {BlocAction? action,
       required String email,
       bool isLoading = false,
+      bool buttonEnable = false,
       int countOfSecondsToResend = 0,
       String? code}) {
     return _VerificationCodeState(
       action: action,
       email: email,
       isLoading: isLoading,
+      buttonEnable: buttonEnable,
       countOfSecondsToResend: countOfSecondsToResend,
       code: code,
     );
@@ -864,6 +866,7 @@ mixin _$VerificationCodeState {
   BlocAction? get action => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
+  bool get buttonEnable => throw _privateConstructorUsedError;
   int get countOfSecondsToResend => throw _privateConstructorUsedError;
   String? get code => throw _privateConstructorUsedError;
 
@@ -881,6 +884,7 @@ abstract class $VerificationCodeStateCopyWith<$Res> {
       {BlocAction? action,
       String email,
       bool isLoading,
+      bool buttonEnable,
       int countOfSecondsToResend,
       String? code});
 }
@@ -899,6 +903,7 @@ class _$VerificationCodeStateCopyWithImpl<$Res>
     Object? action = freezed,
     Object? email = freezed,
     Object? isLoading = freezed,
+    Object? buttonEnable = freezed,
     Object? countOfSecondsToResend = freezed,
     Object? code = freezed,
   }) {
@@ -914,6 +919,10 @@ class _$VerificationCodeStateCopyWithImpl<$Res>
       isLoading: isLoading == freezed
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      buttonEnable: buttonEnable == freezed
+          ? _value.buttonEnable
+          : buttonEnable // ignore: cast_nullable_to_non_nullable
               as bool,
       countOfSecondsToResend: countOfSecondsToResend == freezed
           ? _value.countOfSecondsToResend
@@ -938,6 +947,7 @@ abstract class _$VerificationCodeStateCopyWith<$Res>
       {BlocAction? action,
       String email,
       bool isLoading,
+      bool buttonEnable,
       int countOfSecondsToResend,
       String? code});
 }
@@ -958,6 +968,7 @@ class __$VerificationCodeStateCopyWithImpl<$Res>
     Object? action = freezed,
     Object? email = freezed,
     Object? isLoading = freezed,
+    Object? buttonEnable = freezed,
     Object? countOfSecondsToResend = freezed,
     Object? code = freezed,
   }) {
@@ -973,6 +984,10 @@ class __$VerificationCodeStateCopyWithImpl<$Res>
       isLoading: isLoading == freezed
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      buttonEnable: buttonEnable == freezed
+          ? _value.buttonEnable
+          : buttonEnable // ignore: cast_nullable_to_non_nullable
               as bool,
       countOfSecondsToResend: countOfSecondsToResend == freezed
           ? _value.countOfSecondsToResend
@@ -993,6 +1008,7 @@ class _$_VerificationCodeState implements _VerificationCodeState {
       {this.action,
       required this.email,
       this.isLoading = false,
+      this.buttonEnable = false,
       this.countOfSecondsToResend = 0,
       this.code});
 
@@ -1005,13 +1021,16 @@ class _$_VerificationCodeState implements _VerificationCodeState {
   final bool isLoading;
   @JsonKey()
   @override
+  final bool buttonEnable;
+  @JsonKey()
+  @override
   final int countOfSecondsToResend;
   @override
   final String? code;
 
   @override
   String toString() {
-    return 'VerificationCodeState(action: $action, email: $email, isLoading: $isLoading, countOfSecondsToResend: $countOfSecondsToResend, code: $code)';
+    return 'VerificationCodeState(action: $action, email: $email, isLoading: $isLoading, buttonEnable: $buttonEnable, countOfSecondsToResend: $countOfSecondsToResend, code: $code)';
   }
 
   @override
@@ -1023,6 +1042,8 @@ class _$_VerificationCodeState implements _VerificationCodeState {
             const DeepCollectionEquality().equals(other.email, email) &&
             const DeepCollectionEquality().equals(other.isLoading, isLoading) &&
             const DeepCollectionEquality()
+                .equals(other.buttonEnable, buttonEnable) &&
+            const DeepCollectionEquality()
                 .equals(other.countOfSecondsToResend, countOfSecondsToResend) &&
             const DeepCollectionEquality().equals(other.code, code));
   }
@@ -1033,6 +1054,7 @@ class _$_VerificationCodeState implements _VerificationCodeState {
       const DeepCollectionEquality().hash(action),
       const DeepCollectionEquality().hash(email),
       const DeepCollectionEquality().hash(isLoading),
+      const DeepCollectionEquality().hash(buttonEnable),
       const DeepCollectionEquality().hash(countOfSecondsToResend),
       const DeepCollectionEquality().hash(code));
 
@@ -1048,6 +1070,7 @@ abstract class _VerificationCodeState implements VerificationCodeState {
       {BlocAction? action,
       required String email,
       bool isLoading,
+      bool buttonEnable,
       int countOfSecondsToResend,
       String? code}) = _$_VerificationCodeState;
 
@@ -1057,6 +1080,8 @@ abstract class _VerificationCodeState implements VerificationCodeState {
   String get email;
   @override
   bool get isLoading;
+  @override
+  bool get buttonEnable;
   @override
   int get countOfSecondsToResend;
   @override

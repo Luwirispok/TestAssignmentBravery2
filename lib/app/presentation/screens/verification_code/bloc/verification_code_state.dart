@@ -6,6 +6,7 @@ class VerificationCodeState extends BaseBlocState with _$VerificationCodeState{
     BlocAction? action,
     required String email,
     @Default(false) bool isLoading,
+    @Default(false) bool buttonEnable,
     @Default(0) int countOfSecondsToResend,
     String? code,
 }) = _VerificationCodeState;

@@ -13,7 +13,6 @@ import 'package:power_bank/core/validation/email.dart';
 import 'package:power_bank/core/validation/password.dart';
 import 'package:power_bank/data/gateways/local/preferences_local_gateway.dart';
 import 'package:power_bank/data/repositories/authorization_repository.dart';
-import 'package:power_bank/di/injection.dart';
 import 'package:power_bank/domain/entities/network/request/sign_up_body.dart';
 import 'package:power_bank/domain/entities/network/response/sign_info_response.dart';
 import 'package:power_bank/localization/app_localizations.dart';
@@ -75,25 +74,25 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
   }
 
   Future<void> _signUp(Emitter<SignUpState> emit) async {
-    SignInfoResponse? _data;
-    Failure? _error;
+    SignInfoResponse? data;
+    Failure? error;
 
     emit(state.copyWith(haveError: !_fieldsIsValid, isLoading: true));
 
     Either<SignInfoResponse, Failure> result = await authorizationRepository.signUp(
         body: SignUpBody(email: state.emailForm.value, password: state.passwordForm.value));
     result.fold(
-      (data) => _data = data,
-      (error) => _error = error,
+      (result) => data = result,
+      (failure) => error = failure,
     );
 
     emit(state.copyWith(action: null));
-    if (_error == null && _data != null) {
-      await preferencesLocalGateway.setToken(_data?.userInfo.token);
+    if (error == null && data != null) {
+      await preferencesLocalGateway.setToken(data?.userInfo.token);
       emit(state.copyWith(
           action: NavigateAction.navigateToVerificationCode(NavigateType.push, emailForm: state.emailForm)));
     } else {
-      emit(state.copyWith(action: ShowSnackBarMessage(message: BaseErrorHandler.handleError(_error!, localization))));
+      emit(state.copyWith(action: ShowSnackBarMessage(message: BaseErrorHandler.handleError(error!, localization))));
     }
 
     emit(state.copyWith(isLoading: false));

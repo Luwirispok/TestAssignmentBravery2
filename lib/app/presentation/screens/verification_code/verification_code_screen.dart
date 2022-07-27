@@ -9,6 +9,7 @@ import 'package:power_bank/app/widgets/app_bars/app_bar_with_back_button.dart';
 import 'package:power_bank/app/widgets/buttons/base_button.dart';
 import 'package:power_bank/core/ui/widgets/base_bloc_listener.dart';
 import 'package:power_bank/core/ui/widgets/base_bloc_state_widget.dart';
+import 'package:power_bank/core/utils/duration_extensions.dart';
 
 class VerificationCodeScreen extends StatefulWidget {
   const VerificationCodeScreen({Key? key}) : super(key: key);
@@ -77,7 +78,7 @@ class _VerificationCodeScreenState
       );
 
   Widget _buildCodeInput() => Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             localization.code,
@@ -127,7 +128,8 @@ class _VerificationCodeScreenState
         buildWhen: (previous, current) => previous.countOfSecondsToResend != current.countOfSecondsToResend,
         builder: (context, state) => Center(
           child: Text(
-            _getTime(Duration(seconds: state.countOfSecondsToResend)),
+            Duration(seconds: state.countOfSecondsToResend).getTimeString(),
+            // _getTime(Duration(seconds: state.countOfSecondsToResend)),
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w500,
@@ -139,12 +141,12 @@ class _VerificationCodeScreenState
       );
 
   Widget _buildSendCodeButton() => BlocBuilder<VerificationCodeBloc, VerificationCodeState>(
-        buildWhen: (previous, current) => previous.code != current.code || previous.isLoading != current.isLoading,
+        buildWhen: (previous, current) =>
+            previous.buttonEnable != current.buttonEnable || previous.isLoading != current.isLoading,
         builder: (context, state) {
-          bool buttonEnabled = (state.code?.length ?? 0) >= 4;
           return BaseButton(
             text: localization.submit,
-            enabled: buttonEnabled,
+            enabled: state.buttonEnable && !state.isLoading,
             onPressed: () {
               sendEvent(VerificationCodeEvent.sendClicked());
             },
@@ -181,15 +183,4 @@ class _VerificationCodeScreenState
           ],
         ),
       );
-
-  String _getTime(Duration duration) {
-    String twoDigits(int n) {
-      if (n >= 10) return "$n";
-      return "0$n";
-    }
-
-    String minutes = twoDigits(duration.inMinutes.remainder(60));
-    String seconds = twoDigits(duration.inSeconds.remainder(60));
-    return "$minutes:$seconds";
-  }
 }

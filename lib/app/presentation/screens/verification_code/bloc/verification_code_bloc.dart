@@ -10,10 +10,8 @@ import 'package:power_bank/core/bloc/bloc_action.dart';
 import 'package:power_bank/core/failures.dart';
 import 'package:power_bank/core/utils/base_error_handler.dart';
 import 'package:power_bank/core/validation/email.dart';
-import 'package:power_bank/core/validation/password.dart';
 import 'package:power_bank/data/gateways/local/preferences_local_gateway.dart';
 import 'package:power_bank/data/repositories/authorization_repository.dart';
-import 'package:power_bank/di/injection.dart';
 import 'package:power_bank/domain/entities/network/request/verify_email_body.dart';
 import 'package:power_bank/localization/app_localizations.dart';
 
@@ -53,7 +51,8 @@ class VerificationCodeBloc extends Bloc<VerificationCodeEvent, VerificationCodeS
   }
 
   FutureOr<void> _codeChange(CodeChange event, Emitter<VerificationCodeState> emit) {
-    emit(state.copyWith(code: event.code));
+    bool enable = (event.code.length) >= 4;
+    emit(state.copyWith(code: event.code, buttonEnable: enable));
   }
 
   FutureOr<void> _sendClicked(SendClicked event, Emitter<VerificationCodeState> emit) async {
@@ -74,7 +73,7 @@ class VerificationCodeBloc extends Bloc<VerificationCodeEvent, VerificationCodeS
     );
     result.fold(
       (data) => success = data,
-      (error) => error = error,
+      (failure) => error = failure,
     );
 
     emit(state.copyWith(action: null));

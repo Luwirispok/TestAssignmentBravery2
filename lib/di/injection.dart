@@ -4,16 +4,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:power_bank/app/bloc/app_bloc.dart';
+import 'package:power_bank/core/network/dio_helper.dart';
+import 'package:power_bank/core/network/network_info.dart';
+import 'package:power_bank/data/gateways/local/preferences_local_gateway.dart';
 import 'package:power_bank/data/gateways/remote/authorization_remote_gateway.dart';
 import 'package:power_bank/data/repositories/authorization_repository.dart';
-
+import 'package:power_bank/data/web_socket_manager.dart';
+import 'package:power_bank/localization/app_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../core/network/dio_helper.dart';
-import '../core/network/network_info.dart';
-import '../data/gateways/local/preferences_local_gateway.dart';
-import '../data/web_socket_manager.dart';
-import '../localization/app_localizations.dart';
 
 class Locator {
   static GetIt injection = GetIt.I;

@@ -6,7 +6,6 @@ import 'package:power_bank/data/gateways/remote/authorization_remote_gateway.dar
 import 'package:power_bank/domain/entities/network/request/sign_up_body.dart';
 import 'package:power_bank/domain/entities/network/request/verify_email_body.dart';
 import 'package:power_bank/domain/entities/network/response/sign_info_response.dart';
-import 'package:power_bank/domain/entities/token_entity.dart';
 
 class AuthorizationRepository extends BaseRepository {
   AuthorizationRepository(
@@ -20,7 +19,7 @@ class AuthorizationRepository extends BaseRepository {
     try {
       var result = await sendRequest(gateway.signUp(body: body));
       return result.fold(
-        (response) => Left(response),
+        (response) => Left(response.data),
         (error) => Right(error),
       );
     } catch (error) {
@@ -38,7 +37,7 @@ class AuthorizationRepository extends BaseRepository {
         token: token,
       ));
       return result.fold(
-        (response) => Left(true),
+        (response) => Left(response.success),
         (error) => Right(error),
       );
     } catch (error) {
@@ -54,7 +53,7 @@ class AuthorizationRepository extends BaseRepository {
         token: token,
       ));
       return result.fold(
-        (response) => Left(true),
+        (response) => Left(response.success),
         (error) => Right(error),
       );
     } catch (error) {

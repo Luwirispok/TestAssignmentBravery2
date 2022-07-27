@@ -125,10 +125,16 @@ class _SignUpScreenState extends BaseBlocStateWidget<SignUpScreen, SignUpBloc, S
         },
       );
 
-  Widget _buildSendButton() => BaseButton(
+  Widget _buildSendButton() => BlocBuilder<SignUpBloc, SignUpState>(
+    buildWhen: (previous, current) => previous.isLoading != current.isLoading,
+  builder: (context, state) {
+    return BaseButton(
         text: localization.sendConfirmationCode,
+        enabled: !state.isLoading,
         onPressed: () {
           sendEvent(SignUpEvent.sendClicked());
         },
       );
+  },
+);
 }

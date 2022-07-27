@@ -11,7 +11,7 @@ class BaseRepository {
 
   BaseRepository(this.networkInfo);
 
-  Future<Either<M, Failure>> sendRequest<M>(Future<HttpResponse<M>> request) async {
+  Future<Either<M, Failure>> sendRequest<M  extends BaseResponse>(Future<HttpResponse<M>> request) async {
     if (await networkInfo.isConnected) {
       try {
         HttpResponse<M> result = await request;

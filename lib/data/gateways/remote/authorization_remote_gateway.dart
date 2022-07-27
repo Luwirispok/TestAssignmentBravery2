@@ -15,18 +15,18 @@ abstract class AuthorizationRemoteGateway {
   }
 
   @POST('/sign-up')
-  Future<HttpResponse<SignInfoResponse>> signUp({
+  Future<HttpResponse<BaseResponse<SignInfoResponse>>> signUp({
     @Body() required SignUpBody body,
   });
 
   @POST('/verify-email')
-  Future<HttpResponse> verifyEmail({
+  Future<HttpResponse<BaseResponse>> verifyEmail({
     @Header('Authorization') required token,
     @Body() required VerifyEmailBody body,
   });
 
   @GET('request-email-verification')
-  Future<HttpResponse> requestEmailVerification({
+  Future<HttpResponse<BaseResponse>> requestEmailVerification({
     @Header('Authorization') required token,
   });
 }
